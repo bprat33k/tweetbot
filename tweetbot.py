@@ -1,4 +1,5 @@
 import tweepy
+import sys
 from time import sleep
 #from credentials import *
 
@@ -23,15 +24,19 @@ def tweet():
             print(line)
             if line != '\n':
                 api.update_status(line)
-                sleep(900)
+                sleep(3600)
             else:
                 pass
             
         except tweepy.TweepError as e:
             print(e.reason)
             sleep(2)
+    
+tweet()
 
-for tweet in tweepy.Cursor( api.search, q='#corona').items():
+for tweet in tweepy.Cursor( api.search, 
+                            q='#stockmarket',
+                            since='2020-05-03').items(5):
     try:
         print('Tweet by: @' + tweet.user.screen_name)
         
@@ -45,12 +50,12 @@ for tweet in tweepy.Cursor( api.search, q='#corona').items():
             tweet.user.follow()
             print('Followed the user')
 
-        sleep(1800)
+        sleep(40)
 
     except tweepy.TweepError as e:
         print (e.reason)
 
     except StopIteration:
-        break
+        break    
 
-tweet()
+
