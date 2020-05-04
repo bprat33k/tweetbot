@@ -17,7 +17,7 @@ def tweet():
             print(line)
             if line != '\n':
                 api.update_status(line)
-                sleep(3600)
+                sleep(900)
             else:
                 pass
             
@@ -39,7 +39,7 @@ for tweet in tweepy.Cursor( api.search, q='#corona').items():
             tweet.user.follow()
             print('Followed the user')
 
-        sleep(3600)
+        sleep(1800)
 
     except tweepy.TweepError as e:
         print (e.reason)
